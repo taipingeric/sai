@@ -6,6 +6,7 @@ def dice_coef(y_true, y_pred, smooth=1):
     union = K.sum(y_true, axis=[1,2,3]) + K.sum(y_pred, axis=[1,2,3])
     return K.mean( (2. * intersection + smooth) / (union + smooth), axis=0)
 
+# ref: https://github.com/umbertogriffo/focal-loss-keras
 def focal_loss(gamma=2, alpha=0.5):
     def _focal_loss(y_true, y_pred):
         pt_1 = tf.where(tf.equal(y_true, 1), y_pred, tf.ones_like(y_pred))
